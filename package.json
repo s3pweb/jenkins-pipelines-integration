@@ -1,0 +1,19 @@
+{
+  "name": "jenkins-pipelines-integration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/s3pweb/jenkins-pipelines-integration.git"
+  },
+  "author": "s3pweb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/s3pweb/jenkins-pipelines-integration/issues"
+  },
+  "homepage": "https://github.com/s3pweb/jenkins-pipelines-integration#readme"
+}
