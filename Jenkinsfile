@@ -24,7 +24,7 @@ pipeline {
             agent any
             steps {
                 script {
-                    PACKAGE_VERSION = sh "$(sed -nE 's/^\s*\"version": "(.*?)\",$/\1/p' package.json)"
+                    PACKAGE_VERSION = sh "sed -nE 's/^\s*\"version": "(.*?)\",$/\1/p' package.json"
                     dockerImage = docker.build("s3pweb/jenkins-pipeline-integration:${PACKAGE_VERSION}")
                 }
             }
