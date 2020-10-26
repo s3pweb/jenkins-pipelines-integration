@@ -27,7 +27,7 @@ pipeline {
                     PACKAGE_VERSION = sh "sed -nE 's/^\\s*\"version\": \"(.*?)\",\$/\\1/p' package.json"
                     dockerImage = docker.build("s3pweb/jenkins-pipeline-integration:${PACKAGE_VERSION}")
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        app.push("${PACKAGE_VERSION}")
+                        dockerImage.push("${PACKAGE_VERSION}")
                     }
                 }
             }
