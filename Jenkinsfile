@@ -25,7 +25,9 @@ pipeline {
             steps {
                 script {
                     sh 'npm run docker.build.dev'
-                    sh 'npm run docker.push.dev'
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        sh 'npm run docker.push.dev'
+                    }
                 }
             }
         }
