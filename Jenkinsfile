@@ -24,9 +24,14 @@ pipeline {
             agent any
             steps {
                 script {
-                    sh 'npm run docker.build.dev'
+                    PACKAGE_VERSION = sh(
+                        script: "echo \$(sed -nE 's/^\\s*\"version\": \"(.*?)\",\$/\\1/p' package.json)",
+                        returnStdout: true,
+                    )
+                    dockerImage = docker.build("s3pweb/jenkins-pipeline-integration")
+                    dockerImage = docker.build("s3pweb/jenkins-pipeline-integration")
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        sh 'npm run docker.push.dev'
+                        dockerImage.push("${PACKAGE_VERSION}")
                     }
                 }
             }
