@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "echo \"Ok !\"",
-    "test": "echo \"Warning: no test specified\" && exit 0"
+    "test": "echo \"Warning: no test specified\" && exit 0",
+    "docker.build": "sudo docker build -t s3pweb/jenkins-pipelines-integration:${npm_package_version} . -f ./Dockerfile",
+    "docker.build.dev": "sudo docker build -t s3pweb/jenkins-pipelines-integration:dev-latest . -f ./Dockerfile",
+    "docker.push": "sudo docker push s3pweb/jenkins-pipelines-integration:${npm_package_version}",
+    "docker.push.dev": "sudo docker push s3pweb/jenkins-pipelines-integration:dev-latest",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
@@ -16,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/s3pweb/jenkins-pipelines-integration/issues"
   },
-  "homepage": "https://github.com/s3pweb/jenkins-pipelines-integration#readme"
+  "homepage": "https://github.com/s3pweb/jenkins-pipelines-integration#readme",
+  "devDependencies": {
+    "standard-version": "^9.0.0"
+  }
 }
