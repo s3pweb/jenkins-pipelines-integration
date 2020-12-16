@@ -29,12 +29,20 @@ pipeline {
                         returnStdout: true,
                     )
                 }
-                timeout(time: 30, unit: 'SECONDS') {
+                timeout(time: 60, unit: 'SECONDS') {
                     script {
                         // Show the select input modal
-                       def INPUT_PARAMS = input message: 'Please Provide Parameters', ok: 'Next',
-                                        parameters: [choice(name: 'ENVIRONMENT', choices: ["dev-latest","${PACKAGE_VERSION}"].join('\n'), description: 'Please select the Environment')]
-                        PACKAGE_VERSION = INPUT_PARAMS.ENVIRONMENT
+                       def INPUT_PARAMS = input(
+                        message: 'Please Provide Parameters',
+                        ok: 'Next',
+                        parameters: [
+                            choice(
+                                $class: 'ChoiceParameterDefinition',
+                                name: 'ENVIRONMENT',
+                                choices: ["dev-latest","${PACKAGE_VERSION}"].join('\n'),
+                                description: 'Please select the tag to use')
+                        ])
+                        PACKAGE_VERSION = INPUT_PARAMS
                     }
                 }
                 script {
