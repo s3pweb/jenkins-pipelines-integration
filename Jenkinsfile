@@ -28,7 +28,20 @@ pipeline {
                         script: "echo \$(sed -nE 's/^\\s*\"version\": \"(.*?)\",\$/\\1/p' package.json)",
                         returnStdout: true,
                     )
-                    dockerImage = docker.build("s3pweb/jenkins-pipeline-integration")
+                }
+            }
+            steps {
+                timeout(time: 30, unit: 'SECONDS') {
+                    script {
+                        // Show the select input modal
+                       def INPUT_PARAMS = input message: 'Please Provide Parameters', ok: 'Next',
+                                        parameters: [choice(name: 'ENVIRONMENT', choices: ["dev-latest","${PACKAGE_VERSION}"].join('\n'), description: 'Please select the Environment')]
+                        PACKAGE_VERSION = INPUT_PARAMS.ENVIRONMENT
+                    }
+                }
+            }
+            steps {
+                script {
                     dockerImage = docker.build("s3pweb/jenkins-pipeline-integration")
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                         dockerImage.push("${PACKAGE_VERSION}")
