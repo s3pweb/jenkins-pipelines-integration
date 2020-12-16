@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     environment {
         dockerImage = ''
         PACKAGE_VERSION = ''
@@ -10,11 +10,6 @@ pipeline {
     }
     stages {
         stage('Build & test') {
-            agent {
-                docker {
-                    image 'node:12-alpine'
-                }
-            }
             steps {
                 sh 'npm install'
                 sh 'npm run test'
