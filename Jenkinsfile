@@ -15,8 +15,7 @@ pipeline {
                 sh 'npm run test'
             }
         }
-        stage('Docker build - agent any') {
-            agent any
+        stage('Docker build & push') {
             steps {
                 script {
                     PACKAGE_VERSION = sh(
