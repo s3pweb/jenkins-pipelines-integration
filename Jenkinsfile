@@ -37,8 +37,7 @@ pipeline {
                         ok: 'Next',
                         parameters: [
                             choice(
-                                $class: 'ChoiceParameterDefinition',
-                                name: 'ENVIRONMENT',
+                                name: 'input',
                                 choices: ["dev-latest","${PACKAGE_VERSION}"].join('\n'),
                                 description: 'Please select the tag to use')
                         ])
