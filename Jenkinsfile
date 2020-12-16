@@ -29,8 +29,6 @@ pipeline {
                         returnStdout: true,
                     )
                 }
-            }
-            steps {
                 timeout(time: 30, unit: 'SECONDS') {
                     script {
                         // Show the select input modal
@@ -39,8 +37,6 @@ pipeline {
                         PACKAGE_VERSION = INPUT_PARAMS.ENVIRONMENT
                     }
                 }
-            }
-            steps {
                 script {
                     dockerImage = docker.build("s3pweb/jenkins-pipeline-integration")
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
