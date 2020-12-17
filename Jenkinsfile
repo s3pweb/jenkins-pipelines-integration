@@ -12,7 +12,7 @@ pipeline {
         stage('Build & test') {
             steps {
                 sh 'npm install'
-                sh 'npm run test'
+                sh 'npm run test:ci'
             }
         }
         stage('Docker build & push') {
@@ -27,7 +27,7 @@ pipeline {
                     script {
                         // Show the select input modal
                        def INPUT_PARAMS = input(
-                        message: 'Please Provide Parameters',
+                        message: 'Please provide parameters',
                         ok: 'Next',
                         parameters: [
                             choice(
@@ -45,6 +45,12 @@ pipeline {
                     }
                 }
             }
+        }
+    }
+    post {
+        always {
+            junit skipPublishingChecks: true, testResults: '**/junit.xml'
+            cobertura coberturaReportFile: '**/coverage/cobertura-coverage.xml', enableNewApi: true, lineCoverageTargets: '80, 60, 70'
         }
     }
 }

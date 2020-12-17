@@ -6,10 +6,7 @@
   "scripts": {
     "start": "echo \"Ok !\"",
     "test": "echo \"Warning: no test specified\" && exit 0",
-    "docker.build": "docker build -t s3pweb/jenkins-pipelines-integration:${npm_package_version} . -f ./Dockerfile",
-    "docker.build.dev": "docker build -t s3pweb/jenkins-pipelines-integration:dev-latest . -f ./Dockerfile",
-    "docker.push": "docker push s3pweb/jenkins-pipelines-integration:${npm_package_version}",
-    "docker.push.dev": "docker push s3pweb/jenkins-pipelines-integration:dev-latest",
+    "test:ci": "echo \"Warning: no test specified\" && exit 0",
     "release": "standard-version"
   },
   "repository": {
